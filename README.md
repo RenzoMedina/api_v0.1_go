@@ -66,7 +66,7 @@ We use the framework echo to our api, we must copy the url at Postman or App Fro
 ### POST
 Method to create data on our databases
 ```curl
-	http://localhost:999/api/v0/product
+	https://api-v0-1.onrender.com/v0/product
 ```
 Result 
 ```json
@@ -81,7 +81,7 @@ Result
 ### PUT
 Method to update a data on our databases,also we must added the id 
 ```curl
-	http://localhost:999/api/v0/product/8
+	https://api-v0-1.onrender.com/v0/product/id
 ```
 Result 
 ```json
@@ -96,7 +96,7 @@ Result
 ### DELETE
 Method to delete a data on our databases,also we must added the id 
 ```curl
-	http://localhost:999/api/v0/product/8
+	https://api-v0-1.onrender.com/v0/product/id
 ```
 Result 
 ```json
@@ -107,7 +107,7 @@ Result
 ### GET
 Method "get" to getting everyone data, also we must add the ID
 ```curl
-	http://localhost:999/api/v0/product
+	https://api-v0-1.onrender.com/v0/product
 ```
 Result 
 ```json
@@ -130,7 +130,7 @@ Result
 ### GET
 Method "get" to getting one data, also we must add the ID
 ```curl
-	http://localhost:999/api/v0/product/1
+	https://api-v0-1.onrender.com/v0/product/id
 ```
 Result 
 ```json
