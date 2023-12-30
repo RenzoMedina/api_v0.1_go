@@ -38,10 +38,26 @@ For update values we must create a model with values, for example title:"value01
 	}
 ```
 ### Delete values
-For Delete values we must add the id
+For Delete values we must add the ID
 ```go
 	if err := newmysql.Delete(uint(va)); err != nil {
 		log.Fatalf("model.Delete() %v", err)
+	}
+```
+### Get everyone the values
+For get everyone values of databases
+```go
+	prod, err := newmysql.GetAll()
+	if err != nil {
+		log.Fatalf("model.GetAll() %v", err)
+	}
+```
+### Get values by id
+For get a value, we must add the ID
+```go
+	prod, err := newmysql.GetById(uint(va))
+	if err != nil {
+		log.Fatalf("model.GetById() %v", err)
 	}
 ```
 
@@ -87,4 +103,42 @@ Result
 	{
 		"Data delete ok!"
 	}
+```
+### GET
+Method "get" to getting everyone data, also we must add the ID
+```curl
+	http://localhost:999/api/v0/product
+```
+Result 
+```json
+	[
+  {
+    "ID": 1,
+    "Title": "Example",
+    "Body": "example",
+    "Create_At": "0000-00-30T00:23:05Z",
+    "Update_At": "0000-00-30T00:23:05Z"
+  },
+  {	
+	...
+  },
+  {	
+	...
+  }
+]
+```
+### GET
+Method "get" to getting one data, also we must add the ID
+```curl
+	http://localhost:999/api/v0/product/1
+```
+Result 
+```json
+	{
+    "ID": 1,
+    "Title": "Example",
+    "Body": "example",
+    "Create_At": "0000-00-30T00:23:05Z",
+    "Update_At": "0000-00-30T00:23:05Z"
+  },
 ```

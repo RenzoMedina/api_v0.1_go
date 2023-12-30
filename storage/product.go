@@ -8,7 +8,7 @@ import (
 )
 
 /*
-!
+!Implements interface to scanner
 */
 type scanner interface {
 	Scan(dest ...interface{}) error
@@ -163,20 +163,20 @@ func (m *MySQLProduct) GetById(id uint) (*model.Product, error) {
 ? helper for scanRow
 */
 func scanRowProduct(s scanner) (*model.Product, error) {
-
+	updateNull := sql.NullTime{}
 	m := &model.Product{}
 	err := s.Scan(
 		&m.ID,
 		&m.Title,
 		&m.Body,
 		&m.Create_At,
-		&m.Update_At,
+		&updateNull,
 	)
 
 	if err != nil {
 		return &model.Product{}, err
 	}
-
+	m.Update_At = updateNull.Time
 	return m, nil
 
 }

@@ -40,3 +40,14 @@ func NewConnection() {
 func Pool() *sql.DB {
 	return db
 }
+
+/*
+? function for validated the value null
+*/
+func stringToNull(s string) sql.NullString {
+	null := sql.NullString{String: s}
+	if null.String != "" {
+		null.Valid = true
+	}
+	return null
+}
