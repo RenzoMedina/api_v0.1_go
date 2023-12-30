@@ -66,3 +66,31 @@ func Destroy(c echo.Context) error {
 	return c.JSON(http.StatusOK, "Data delete ok!")
 
 }
+
+func Index(c echo.Context) error {
+	mysqlser := storage.NewMySQL(storage.Pool())
+	newmysql := model.NewServices(mysqlser)
+
+	prod, err := newmysql.GetAll()
+	if err != nil {
+		log.Fatalf("model.GetAll() %v", err)
+	}
+	return c.JSON(http.StatusOK, prod)
+}
+
+func Show(c echo.Context) error {
+	//convert type string to int
+	id := c.Param("id")
+	va, err := strconv.Atoi(id)
+	if err != nil {
+		return err
+	}
+	mysqlser := storage.NewMySQL(storage.Pool())
+	newmysql := model.NewServices(mysqlser)
+
+	prod, err := newmysql.GetById(uint(va))
+	if err != nil {
+		log.Fatalf("model.GetById() %v", err)
+	}
+	return c.JSON(http.StatusOK, prod)
+}

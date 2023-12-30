@@ -7,6 +7,13 @@ import (
 	"apiv0.1/model"
 )
 
+/*
+!
+*/
+type scanner interface {
+	Scan(dest ...interface{}) error
+}
+
 const (
 	MigrateTable = `
 		CREATE TABLE IF NOT EXISTS products(
@@ -111,4 +118,65 @@ func (m *MySQLProduct) Delete(id uint) error {
 	}
 	fmt.Println("Data was destroy of the database successfully!!")
 	return nil
+}
+
+func (m *MySQLProduct) GetAll() (model.Products, error) {
+	stm, err := db.Prepare(QueryProduct)
+	if err != nil {
+		return nil, err
+	}
+	defer stm.Close()
+
+	rows, err := stm.Query()
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	pro := make(model.Products, 0)
+	for rows.Next() {
+		m, err := scanRowProduct(rows)
+		if err != nil {
+			return nil, err
+		}
+		pro = append(pro, m)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	fmt.Println("Query data was successfully!!")
+	return pro, nil
+}
+
+func (m *MySQLProduct) GetById(id uint) (*model.Product, error) {
+	stm, err := db.Prepare(QueryByIdProduct)
+	if err != nil {
+		return &model.Product{}, err
+	}
+	defer stm.Close()
+	return scanRowProduct(stm.QueryRow(id))
+}
+
+/*
+? helper for scanRow
+*/
+func scanRowProduct(s scanner) (*model.Product, error) {
+
+	m := &model.Product{}
+	err := s.Scan(
+		&m.ID,
+		&m.Title,
+		&m.Body,
+		&m.Create_At,
+		&m.Update_At,
+	)
+
+	if err != nil {
+		return &model.Product{}, err
+	}
+
+	return m, nil
+
 }

@@ -18,6 +18,8 @@ func main() {
 	/*
 	* Routes
 	 */
+	e.GET("/api/v0/product", controller.Index)
+	e.GET("/api/v0/product/:id", controller.Show)
 	e.POST("/api/v0/product", controller.Store)
 	e.PUT("/api/v0/product/:id", controller.Update)
 	e.DELETE("/api/v0/product/:id", controller.Destroy)

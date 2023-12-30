@@ -14,8 +14,11 @@ var (
 	once sync.Once
 )
 
+/*
+!Where We were working with date we must implements "?parseTime=true" on of the script of connection had our database
+*/
 const (
-	dns = "usi1p2fhaqjrbcxd:7b3gioYphTLYaZoRbF8P@tcp(byr2cqsjyxldxj3oabah-mysql.services.clever-cloud.com)/byr2cqsjyxldxj3oabah"
+	dns = "usi1p2fhaqjrbcxd:7b3gioYphTLYaZoRbF8P@tcp(byr2cqsjyxldxj3oabah-mysql.services.clever-cloud.com)/byr2cqsjyxldxj3oabah?parseTime=true"
 )
 
 func NewConnection() {

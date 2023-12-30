@@ -21,8 +21,8 @@ type Storage interface {
 	Migrate() error
 	Create(*Product) error
 	Update(*Product) error
-	//GetAll()(Products, error)
-	//GetId(uint)(*Product, error)
+	GetAll() (Products, error)
+	GetById(uint) (*Product, error)
 	Delete(uint) error
 }
 
@@ -48,4 +48,12 @@ func (s *Service) Update(p *Product) error {
 
 func (s *Service) Delete(id uint) error {
 	return s.storage.Delete(id)
+}
+
+func (s *Service) GetAll() (Products, error) {
+	return s.storage.GetAll()
+}
+
+func (s *Service) GetById(id uint) (*Product, error) {
+	return s.storage.GetById(id)
 }
