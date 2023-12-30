@@ -18,11 +18,11 @@ func main() {
 	/*
 	* Routes
 	 */
-	e.GET("/api/v0/product", controller.Index)
-	e.GET("/api/v0/product/:id", controller.Show)
-	e.POST("/api/v0/product", controller.Store)
-	e.PUT("/api/v0/product/:id", controller.Update)
-	e.DELETE("/api/v0/product/:id", controller.Destroy)
+	e.GET("v0/product", controller.Index)
+	e.GET("v0/product/:id", controller.Show)
+	e.POST("v0/product", controller.Store)
+	e.PUT("v0/product/:id", controller.Update)
+	e.DELETE("v0/product/:id", controller.Destroy)
 
 	fmt.Println("Servidor started!!")
 	e.Logger.Fatal(e.Start(":999"))
