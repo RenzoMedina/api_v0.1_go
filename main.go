@@ -29,14 +29,8 @@ func main() {
 	/*
 		? Cors
 	*/
-	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"*"},
-		AllowCredentials: true,
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
-	})
-
-	hanlder := c.Handler(e)
+	c := cors.Default().Handler(e)
 
 	fmt.Println("Servidor started!!")
-	e.Logger.Fatal(e.Start(":999"), hanlder)
+	e.Logger.Fatal(e.Start(":999"), c)
 }
