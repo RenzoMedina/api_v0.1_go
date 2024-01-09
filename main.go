@@ -6,8 +6,7 @@ import (
 	"apiv0.1/controller"
 	"apiv0.1/storage"
 	"github.com/labstack/echo/v4"
-
-	"github.com/rs/cors"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
@@ -26,11 +25,13 @@ func main() {
 	e.PUT("v0/product/:id", controller.Update)
 	e.DELETE("v0/product/:id", controller.Destroy)
 
+	e.Use(middleware.CORS())
 	/*
-		? Cors
+			? Cors
+
+		c := cors.Default().Handler(e)
 	*/
-	c := cors.Default().Handler(e)
 
 	fmt.Println("Servidor started!!")
-	e.Logger.Fatal(e.Start(":999"), c)
+	e.Logger.Fatal(e.Start(":999"))
 }
